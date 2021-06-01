@@ -1,0 +1,11 @@
+{
+    "description": "A Gnome Extension to handle touchscreen and reading mode on and off",
+    "name" : "TouchScreen",
+    "shell-version": [
+        "5.0.17"
+    ],
+    "url" : "",
+    "uuid" : "touchscreen@github.com",
+    "version": 1
+
+}
