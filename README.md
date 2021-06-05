@@ -2,4 +2,4 @@
 A Gnome Extension to handle touchscreen and reading mode on and off
 
 ## References
-[how to create a gnome shell extension](https://gitlab.com/justperfection.channel/how-to-create-a-gnome-shell-extension/)
+[Gnome Shell Extension Docs](https://www.codeproject.com/Articles/5271677/How-to-Create-A-GNOME-Extension)
