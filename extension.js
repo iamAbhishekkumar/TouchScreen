@@ -9,69 +9,40 @@ const Me = imports.misc.extensionUtils.getCurrentExtension();
 let myPopup;
 
 const MyPopup = GObject.registerClass(
-class MyPopup extends PanelMenu.Button {
+  class MyPopup extends PanelMenu.Button {
 
-  _init () {
+    _init() {
 
-    super._init(0);
-    
-    let icon = new St.Icon({
-      gicon : Gio.icon_new_for_string(Me.dir.get_path() + "/assets/clicking.svg"),
-      style_class : 'system-status-icon',
-    //   TODO : change icon color according to shell color
-    });
+      super._init(0);
+      // shell extension icon
+      let icon = new St.Icon({
+        gicon: Gio.icon_new_for_string(Me.dir.get_path() + "/assets/clicking.svg"),
+        style_class: 'system-status-icon',
+        //   TODO : change icon color according to shell color
+      });
 
-    this.add_child(icon);
+      this.add_child(icon);
 
-    let pmItem = new PopupMenu.PopupMenuItem('Normal Menu Item');
-    pmItem.add_child(new St.Label({text : 'Label added to the end'}));
-    this.menu.addMenuItem(pmItem);
+      // toggle item
+      let popupSwitchMenuItem = new PopupMenu.PopupSwitchMenuItem(
+        'TouchScreen',
+        'value',
+        
+      );
+      // TODO: Extract the current value of touchscreen state
+      popupSwitchMenuItem.setToggleState(false);
 
-    pmItem.connect('activate', () => {
-      log('clicked');
-    });
+      popupSwitchMenuItem.connect('toggled', (_, value) => {
+        if (value) {
+          log("Switch is on");
+        } else {
+          log("Switch is off")
+        }
 
-    this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-
-    this.menu.addMenuItem(
-      new PopupMenu.PopupMenuItem(
-        "User cannot click on this item",
-        {reactive : false},
-      )
-    );
-
-    this.menu.connect('open-state-changed', (menu, open) => {
-      if (open) {
-        log('opened');
-      } else {
-        log('closed');
-      }
-    });
-
-    // sub menu
-    let subItem = new PopupMenu.PopupSubMenuMenuItem('sub menu item');
-    this.menu.addMenuItem(subItem);
-    subItem.menu.addMenuItem(new PopupMenu.PopupMenuItem('item 1'));
-    subItem.menu.addMenuItem(new PopupMenu.PopupMenuItem('item 2'), 0);
-
-    // section
-    let popupMenuSection = new PopupMenu.PopupMenuSection();
-    popupMenuSection.actor.add_child(new PopupMenu.PopupMenuItem('section'));
-    this.menu.addMenuItem(popupMenuSection);
-
-    // image item
-    let popupImageMenuItem = new PopupMenu.PopupImageMenuItem(
-      'Menu Item with Icon',
-      'security-high-symbolic',
-    );
-    this.menu.addMenuItem(popupImageMenuItem);
-
-    // you can close, open and toggle the menu with
-    // this.menu.close();
-    // this.menu.open();
-    // this.menu.toggle();
-  }
-});
+      });
+      this.menu.addMenuItem(popupSwitchMenuItem);
+    }
+  });
 
 function init() {
 }
