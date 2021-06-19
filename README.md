@@ -7,6 +7,10 @@ A Gnome Extension to handle touchscreen and reading mode on and off
 - [ ] TouchScreen Handler
 - [ ] Reading Mode 
 
+## For Debugging 
+```
+journalctl -f -o cat /usr/bin/gnome-shell
+```
 
 ## References
 

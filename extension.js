@@ -1,7 +1,7 @@
 const Main = imports.ui.main;
-const St = imports.gi.St;
 const GObject = imports.gi.GObject;
 const Gio = imports.gi.Gio;
+const { St, GLib, Clutter } = imports.gi;
 const PanelMenu = imports.ui.panelMenu;
 const PopupMenu = imports.ui.popupMenu;
 const Me = imports.misc.extensionUtils.getCurrentExtension();
@@ -34,8 +34,11 @@ const MyPopup = GObject.registerClass(
 
       popupSwitchMenuItem.connect('toggled', (_, value) => {
         if (value) {
-          log("Switch is on");
+          var [ok, out, err, exit] = GLib.spawn_command_line_sync(`/bin/sh $PWD/scripts/on.sh`);
+          log("Switch On");
+
         } else {
+          var [ok, out, err, exit] = GLib.spawn_command_line_sync(`/bin/sh $PWD/scripts/off.sh`);
           log("Switch is off")
         }
 
