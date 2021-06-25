@@ -18,7 +18,9 @@ const MyPopup = GObject.registerClass(
       let icon = new St.Icon({
         gicon: Gio.icon_new_for_string(Me.dir.get_path() + "/assets/clicking.svg"),
         style_class: 'system-status-icon',
-        //   TODO : change icon color according to shell color
+        //   TODO Change icon color according to shell color
+        // Like when color of shell is dark then icon color should be light adn vice versa
+        // labels: enhancement
       });
 
       this.add_child(icon);
@@ -29,7 +31,6 @@ const MyPopup = GObject.registerClass(
         'value',
         
       );
-      // TODO: Extract the current value of touchscreen state
       popupSwitchMenuItem.setToggleState(false);
 
       popupSwitchMenuItem.connect('toggled', (_, value) => {

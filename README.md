@@ -2,10 +2,6 @@
 
 A Gnome Extension to handle touchscreen and reading mode on and off
 
-# ToDo
-
-- [ ] TouchScreen Handler
-- [ ] Reading Mode 
 
 ## For Debugging 
 ```
